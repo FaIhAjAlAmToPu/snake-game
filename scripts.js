@@ -1,9 +1,15 @@
+let highScore = localStorage.getItem('snakeHighScore') || 0;
+document.getElementById("highscore").innerText = highScore;
+
 const canvas = document.getElementById('stage');
 const ctx = canvas.getContext('2d');
 
 const box = 20;
 const width = canvas.width / box;
 const height = canvas.height / box;
+const fruits = ["🍎", "🍌", "🍇", "🍓", "🍒", "🍍"];
+randomFruit = fruits[Math.floor(Math.random() * fruits.length)];
+
 
 document.addEventListener('keydown', changeDirection);
 let direction = 'RIGHT';
@@ -36,20 +42,25 @@ function draw(){
         return;
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black"; // Text color
-    ctx.font = "20px Arial"; // Font style
-    ctx.fillText("Score: " + score, 10, 30); // Position: (10,30)
+
 
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = (i === 0) ? 'green' : 'lightgreen';
         ctx.fillRect(snake[i].x * box, snake[i].y * box, box, box);
     }
 
-    ctx.beginPath(); // Start drawing
-    ctx.arc(food.x * box + box / 2, food.y * box + box / 2, box / 2, 0, Math.PI * 2);
-    ctx.fillStyle = "red"; // Set color
-    ctx.fill(); // Fill the shape
-    ctx.closePath(); // End drawing
+    // ctx.beginPath(); // Start drawing
+    // ctx.arc(food.x * box + box / 2, food.y * box + box / 2, box / 2, 0, Math.PI * 2);
+    // ctx.fillStyle = "red"; // Set color
+    // ctx.fill(); // Fill the shape
+    // ctx.closePath(); // End drawing
+
+    ctx.font = `${box + 4}px serif`;
+ctx.textAlign = "left";
+ctx.textBaseline = "top";
+ctx.fillText(randomFruit, food.x * box, food.y * box - box * 0.1);
+
+
 
 
     let headX = snake[0].x;
@@ -64,6 +75,7 @@ function draw(){
         score++;
         speed = Math.max(50, speed - 5);
         spawnFood();
+        updateScoreDisplay();
     } else {
         snake.pop();
     }
@@ -105,11 +117,22 @@ function resetGame() {
     clearInterval(gameLoop);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     speed = 150; // Reset speed
-}
+    updateScoreDisplay(); // reset visible score
 
+}
+function updateScoreDisplay() {
+  document.getElementById("score").innerText = score;
+  if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('snakeHighScore', highScore);
+      document.getElementById("highscore").innerText = highScore;
+  }
+}
 function spawnFood() {
     food.x = Math.floor(Math.random() * width);
     food.y = Math.floor(Math.random() * height);
+
+    randomFruit = fruits[Math.floor(Math.random() * fruits.length)]
 }
 
 // Buttons
