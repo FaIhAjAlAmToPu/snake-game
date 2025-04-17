@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #000;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+#start {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#restart {
+    background-color: #f44336; /* Red */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#start:hover {
+    background-color: #45a049;
+}
+
+#restart:hover {
+    background-color: #d32f2f;
+}
