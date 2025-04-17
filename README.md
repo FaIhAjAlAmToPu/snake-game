@@ -1,6 +1,6 @@
 # 🐍 Snake Game
 
-A simple snake game built using **JavaScript** and the HTML5 **Canvas API**.
+A simple snake game built using **JavaScript** and the HTML5 **Canvas API**. [Play Online](https://faihajalamtopu.github.io/snake-game/)!!
 
 ## 📜 Description
 This is a classic **Snake Game**, where the player controls a growing snake, eats food, and avoids collisions with itself. The game increases in speed as the snake grows longer.
